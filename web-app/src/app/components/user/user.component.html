@@ -1,0 +1,258 @@
+<!-- Navbar -->
+
+
+
+<div class="row">
+  <div class="col-md-7">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title ">Danh Sách</h4>
+        <p class="card-category"> Danh Sách nhân viên</p>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <!-- <table datatable  id="datatables" class="table">
+            <thead class=" text-primary">
+
+              <th>
+                Họ và Tên
+              </th>
+              <th>
+                Email
+              </th>
+              <th>
+                Ngày Sinh
+              </th>
+              <th>
+                Vị Trí
+              </th>
+            </thead>
+            <tbody >
+              <tr  *ngFor="let user of listuser" >
+                <td>
+                  {{user.payload.doc.data().tenNguoiDung}}
+                </td>
+                <td>
+                  {{user.payload.doc.data().email}}
+                </td>
+                <td>
+                  {{user.payload.doc.data().ngaySinh}}
+                </td>
+                <td>
+                  <div>{{user.payload.doc.data().viTri}}</div>
+                  
+                </td>
+                
+
+              </tr>
+
+            </tbody>
+          </table> -->
+          <table     style="text-align: center"  id="datatables" class="row-border hover">
+              <thead>
+                <tr>
+                    <th>
+                        Họ và Tên
+                      </th>
+                      <th>
+                        Email
+                      </th>
+                      <th>
+                        Ngày Sinh
+                      </th>
+                      <th>
+                        Vị Trí
+                      </th>
+             
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <!-- <tr  *ngFor="let user of listuser" >
+                      <td>
+                        {{user.tenNguoiDung}}
+                      </td>
+                      <td>
+                        {{user.email}}
+                      </td>
+                      <td>
+                        {{user.ngaySinh}}
+                      </td>
+                      <td>
+                        <div>{{user.viTri}}</div>
+                        
+                      </td>
+                      
+      
+                    </tr>
+                   
+              </tbody> -->
+           
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="checktao" class="col-md-5">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Thêm Tài Khoản</h4>
+        <p class="card-category">Thông tin người dùng</p>
+      </div>
+      <div  class="card-body">
+        <form [formGroup]="ngForm" >
+
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Họ Và Tên</label>
+                <input formControlName="tenNguoiDung" [(ngModel)]="user.tenNguoiDung"  type="text"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.tenNguoiDung.errors }">
+                <div *ngIf="submitted && f.tenNguoiDung.errors" class="invalid-feedback">
+                  <div *ngIf="f.tenNguoiDung.errors.required">Vui lòng nhập Họ và tên</div>
+              </div>
+              
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Email</label>
+                <input formControlName="email" [(ngModel)]="user.email"  type="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required">Vui lòng nhập Email</div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">Địa Chỉ</label>
+                <input formControlName="diaChi" [(ngModel)]="user.diaChi"  type="text"  class="form-control"[ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                <div *ngIf="submitted && f.diaChi.errors" class="invalid-feedback">
+                  <div *ngIf="f.diaChi.errors.required">Vui lòng nhập dịa chỉ</div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Ngày Sinh</label>
+                <input formControlName="ngaySinh" [(ngModel)]="user.ngaySinh"  type="date" value="20/10/1998" class="form-control"[ngClass]="{ 'is-invalid': submitted && f.ngaySinh.errors }">
+                <div *ngIf="submitted && f.ngaySinh.errors" class="invalid-feedback">
+                  <div *ngIf="f.ngaySinh.errors.required">Vui lòng chọn ngày sinh</div>
+              </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Giới Tính</label><br/>
+                <input type="radio" formControlName="gioiTinh" [(ngModel)]="user.gioiTinh" name="gioiTinh" value="Nam" 
+                  >Nam
+                  <br/>
+                <input type="radio" formControlName="gioiTinh" [(ngModel)]="user.gioiTinh" name="gioiTinh" value="Nữ"
+                  >Nữ
+
+
+              </div>
+              
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Vị trí</label>
+                <br />
+                <select style="color: #8b92a9;background: #3C4858;" formControlName="viTri" [(ngModel)]="user.viTri" [ngClass]="{ 'is-invalid': submitted && f.viTri.errors }">
+                  <option *ngFor="let vt of vitri">{{vt}}</option>
+                </select>
+              </div>
+              <div *ngIf="submitted && f.viTri.errors" class="invalid-feedback">
+                <div *ngIf="f.viTri.errors.required">Vui chọn vị trí</div>
+            </div>
+            </div>
+          </div>
+
+          <button  type="submit" class="btn btn-primary pull-right"
+            (click)="tao()">Thêm</button>
+          <div class="clearfix"></div>
+        </form>
+
+      </div>
+     
+    </div>
+  </div>
+  <div *ngIf="checksua" class="col-md-5">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">Thêm Tài Khoản</h4>
+          <p class="card-category">Thông tin người dùng</p>
+        </div>
+        <div  class="card-body">
+         
+  
+            <div class="row">
+  
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Họ Và Tên</label>
+                  <input  [(ngModel)]="user.tenNguoiDung"  type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">email</label>
+                  <input  [(ngModel)]="user.email"  type="email" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Địa Chỉ</label>
+                  <input [(ngModel)]="user.diaChi"  type="text" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Ngày Sinh</label>
+                  <input  [(ngModel)]="user.ngaySinh"  type="date" value="20/10/1998" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Giới Tính</label><br/>
+                  <input type="radio" [(ngModel)]="user.gioiTinh" name="gioiTinh" value="Nam"
+                    >Nam
+                    <br/>
+                  <input type="radio"  [(ngModel)]="user.gioiTinh" name="gioiTinh" value="Nữ"
+                    >Nữ
+  
+  
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Vị trí</label>
+                  <br />
+                  <select style="color: #8b92a9;background: #3C4858;"  [(ngModel)]="user.viTri">
+                    <option *ngFor="let vt of vitri">{{vt}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+  
+            <button type="submit" class="btn btn-warning pull-right"
+              (click)="sua()">Sửa</button>
+            
+            <div class="clearfix"></div>
+          
+  
+        </div>
+       
+      </div>
+    </div>
+ 
+
+</div>

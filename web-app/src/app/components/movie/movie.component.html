@@ -1,0 +1,244 @@
+<!-- Navbar -->
+
+
+
+<div class="row">
+  <div class="col-md-7">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title ">Danh Sách</h4>
+        <p class="card-category"> Danh Sách nhân viên</p>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div *ngFor="let item of trangThai"class="col-md-3">
+            <input (click)="filter($event, item)" type="checkbox"  />{{item}}
+          </div>
+          
+        </div>
+        <div class="table-responsive">
+          <!-- <table datatable  id="datatables" class="table">
+              <thead class=" text-primary">
+  
+                <th>
+                  Họ và Tên
+                </th>
+                <th>
+                  Email
+                </th>
+                <th>
+                  Ngày Sinh
+                </th>
+                <th>
+                  Vị Trí
+                </th>
+              </thead>
+              <tbody >
+                <tr  *ngFor="let user of listuser" >
+                  <td>
+                    {{user.payload.doc.data().tenNguoiDung}}
+                  </td>
+                  <td>
+                    {{user.payload.doc.data().email}}
+                  </td>
+                  <td>
+                    {{user.payload.doc.data().ngaySinh}}
+                  </td>
+                  <td>
+                    <div>{{user.payload.doc.data().viTri}}</div>
+                    
+                  </td>
+                  
+  
+                </tr>
+  
+              </tbody>
+            </table> -->
+          <table style="text-align: center" id="datatables" class="row-border hover">
+            <thead>
+              <tr>
+                <th>
+                  Tên Phim
+                </th>
+                <th>
+                  Ngày Phát Hành
+                </th>
+                <th>
+                  Thể Loại
+                </th>
+                <th>
+                  Trạng Thái
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr  *ngFor="let user of listuser" >
+                        <td>
+                          {{user.tenNguoiDung}}
+                        </td>
+                        <td>
+                          {{user.email}}
+                        </td>
+                        <td>
+                          {{user.ngaySinh}}
+                        </td>
+                        <td>
+                          <div>{{user.viTri}}</div>
+                          
+                        </td>
+                        
+        
+                      </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="checktao" class="col-md-5">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Thêm Phim</h4>
+        <p class="card-category">Thông tin Phim</p>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="ngForm">
+
+          <div class="row">
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">Tên Phim</label>
+                <input formControlName="tenPhim" [(ngModel)]="movie.tenPhim" type="text" class="form-control"[ngClass]="{ 'is-invalid': submitted && f.tenPhim.errors }">
+                <div *ngIf="submitted && f.tenPhim.errors" class="invalid-feedback">
+                  <div *ngIf="f.tenPhim.errors.required">Vui lòng nhập tên phim</div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Ngày Phát Hành</label>
+                <input formControlName="ngayPhatHanh" [(ngModel)]="movie.ngayPhatHanh" type="date" class="form-control"[ngClass]="{ 'is-invalid': submitted && f.ngayPhatHanh.errors }">
+                <div *ngIf="submitted && f.ngayPhatHanh.errors" class="invalid-feedback">
+                  <div *ngIf="f.ngayPhatHanh.errors.required">Vui lòng chọn ngày </div>
+              </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Thể loại</label>
+                <br />
+                <select style="width: -webkit-fill-available;color: #8b92a9;background: #3C4858;"
+                  formControlName="theLoai" [(ngModel)]="movie.theLoai" [ngClass]="{ 'is-invalid': submitted && f.theLoai.errors }">
+                  <option *ngFor="let tl of theloai">{{tl}}</option>
+                </select>
+                <div *ngIf="submitted && f.theLoai.errors" class="invalid-feedback">
+                  <div *ngIf="f.theLoai.errors.required">Vui lòng chọn thể loại</div>
+              </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Trạng Thái</label>
+                <br />
+                <select style="width: -webkit-fill-available;color: #8b92a9;background: #3C4858;"
+                  formControlName="trangthai" [(ngModel)]="movie.trangThai"[ngClass]="{ 'is-invalid': submitted && f.trangthai.errors }">
+                  <option *ngFor="let tt of trangThai">{{tt}}</option>
+                </select>
+                <div *ngIf="submitted && f.trangthai.errors" class="invalid-feedback">
+                  <div *ngIf="f.trangthai.errors.required">Vui lòng chọn trạng thái</div>
+              </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">Mô tả</label>
+                <textarea rows="5" formControlName="moTa" [(ngModel)]="movie.moTa" type="text"
+                  class="form-control"[ngClass]="{ 'is-invalid': submitted && f.moTa.errors }"></textarea>
+                  <div *ngIf="submitted && f.moTa.errors" class="invalid-feedback">
+                    <div *ngIf="f.moTa.errors.required">Vui lòng nhập mô tả</div>
+                </div>
+                </div>
+            </div>
+          </div>
+
+
+          <button type="submit" class="btn btn-primary pull-right"
+            (click)="tao()">Thêm</button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <div *ngIf="checksua" class="col-md-5">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Sửa thông tin phim</h4>
+        <p class="card-category">Thông tin phim</p>
+      </div>
+      <div class="card-body">
+
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="bmd-label-floating">Tên Phim</label>
+              <input [(ngModel)]="movie.tenPhim" type="text" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="bmd-label-floating">Ngày Phát Hành</label>
+              <input [(ngModel)]="movie.ngayPhatHanh" type="date" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="bmd-label-floating">Thể loại</label>
+              <br />
+              <select style="width: -webkit-fill-available;color: #8b92a9;background: #3C4858;"
+                [(ngModel)]="movie.theLoai"  >
+                <option *ngFor="let tl of theloai">{{tl}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="bmd-label-floating">Trạng Thái</label>
+              <br />
+              <select style="width: -webkit-fill-available;color: #8b92a9;background: #3C4858;"
+                [(ngModel)]="movie.trangThai">
+                <option *ngFor="let tt of trangThai">{{tt}}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="bmd-label-floating">Mô tả</label>
+              <textarea rows="5" [(ngModel)]="movie.moTa" type="text" class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-warning pull-right" id="sua" (click)="back()">Trở về</button>
+        <button type="submit" class="btn btn-warning pull-right" id="sua" (click)="sua()">Sửa</button>
+        <button (click)="xoa()" type="submit" class="btn btn-danger pull-right" id="xoa">Xóa</button>
+        <div class="clearfix"></div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

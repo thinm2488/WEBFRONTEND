@@ -1,0 +1,17 @@
+<app-sidebar></app-sidebar>
+<div class="main-panel">
+    <!-- Navbar -->
+   <app-header></app-header>
+    <!-- End Navbar -->
+  
+    <div class="content">
+    <!-- <app-dashboard></app-dashboard> -->
+    <router-outlet></router-outlet>
+    </div>
+  <app-footer></app-footer>
+    <script>
+      const x = new Date().getFullYear();
+      let date = document.getElementById('date');
+      date.innerHTML = '&copy; ' + x + date.innerHTML;
+    </script>
+  </div>
