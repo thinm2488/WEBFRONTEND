@@ -23,7 +23,7 @@
     "@angular/router": "~8.2.8",
     "@ng-bootstrap/ng-bootstrap": "^5.1.4",
     "angular-datatables": "^8.0.0",
-    "datatables.net": "^1.10.20",
+    "datatables.net": "^1.10.22",
     "datatables.net-dt": "^1.10.20",
     "firebase": "^7.2.2",
     "jquery": "^3.4.1",
